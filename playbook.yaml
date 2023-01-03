@@ -1,0 +1,45 @@
+- name: OS Hardening is cool
+  hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+    - name: Check if nano is latest and installed
+      apt:
+        name: nano
+        state: latest
+    - name: Print the gateway for the host if defined
+      ansible.builtin.debug:
+        msg: System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}
+      when: ansible_default_ipv4.gateway is defined
+    - name: Install git
+      become: true
+      ansible.builtin.package:
+        name: git
+        state: present
+    - name: ubuntu release name
+      command: lsb_release -cs
+      register: rel
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+    - name: install openscap-scanner
+      apt:
+        name: libopenscap8
+        state: latest
+    - name: validate installation
+      shell: oscap --version | grep "command line tool"
+      register: oscap_version
+    - name: print oscap version
+      debug: msg={{ oscap_version.stdout }}
+    - name: print ubuntu release
+      debug: msg={{ rel.stdout }}
+    - name: copy script
+      copy:
+        src: /home/kev/vag/openscap_scan.sh
+        dest: /home/vagrant/openscap_scan.sh
+        mode: 0755
+    - name: Scan system for vulnerability
+      shell: /home/vagrant/openscap_scan.sh
