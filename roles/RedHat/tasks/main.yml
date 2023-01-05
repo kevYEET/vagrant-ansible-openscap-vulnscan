@@ -1,0 +1,29 @@
+- name: Update all packages
+  yum:
+    name: '*'
+    state: latest
+  when: ansible_distribution == 'CentOS'
+- name: Upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install openscap-scanner on CentOS
+  yum:
+    name: libopenscap8
+    state: latest
+
+- name: validate installation
+  shell: oscap --version | grep "command line tool"
+  register: oscap_version
+- name: print oscap version
+  debug: msg={{ oscap_version.stdout }}
+- name: print ubuntu release
+  debug: msg={{ rel.stdout }}
+- name: copy script
+  copy:
+    src: /home/kev/vag/openscap_scan.sh
+    dest: /home/vagrant/openscap_scan.sh
+    mode: 0755
+- name: Scan system for vulnerability
+  shell: /home/vagrant/openscap_scan.sh

@@ -1,0 +1,45 @@
+---
+- name: Ubuntu release name
+  command: lsb_release -cs
+  register: rel
+- name: Update and upgrade packages for Ubuntu
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+
+- name: Check if nano is latest and installed
+  apt:
+    name: nano
+    state: latest
+
+- name: install nginx
+  apt: pkg=nginx state=present
+- name: enable nginx to start on boot
+  systemd: name=nginx enabled=yes
+- name: start nginx
+  service: name=nginx state=started
+      
+- name: install bzip2
+  apt: pkg=bzip2 state=present
+
+- name: install openscap-scanner on Ubuntu
+  apt:
+    name: libopenscap8
+    state: latest 
+
+- name: validate installation
+  shell: oscap --version | grep "command line tool"
+  register: oscap_version
+- name: print oscap version
+  debug: msg={{ oscap_version.stdout }}
+- name: print ubuntu release
+  debug: msg={{ rel.stdout }}
+- name: copy script
+  copy:
+    src: /home/kev/vag/openscap_scan.sh
+    dest: /home/vagrant/openscap_scan.sh
+    mode: 0755
+- name: Scan system for vulnerability
+  shell: /home/vagrant/openscap_scan.sh
