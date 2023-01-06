@@ -8,22 +8,33 @@
     name: '*'
     state: latest
 
-- name: Install openscap-scanner on CentOS
+- name: Ensure EPEL repository is present
   yum:
-    name: libopenscap8
-    state: latest
+    name: epel-release
+    state: present
+
+- name: Install wget
+  yum:
+    name: wget
+    state: present
+
+- name: Install OpenSCAP
+  yum:
+    name: openscap-scanner
+    state: present
 
 - name: validate installation
   shell: oscap --version | grep "command line tool"
   register: oscap_version
 - name: print oscap version
   debug: msg={{ oscap_version.stdout }}
-- name: print ubuntu release
-  debug: msg={{ rel.stdout }}
+- name: Print CentOS release
+  debug:
+    msg: "CentOS release is {{ ansible_distribution_version }}"
 - name: copy script
   copy:
-    src: /home/kev/vag/openscap_scan.sh
-    dest: /home/vagrant/openscap_scan.sh
+    src: /home/kev/vag/openscap_scan_cent.sh
+    dest: /home/vagrant/openscap_scan_cent.sh
     mode: 0755
 - name: Scan system for vulnerability
-  shell: /home/vagrant/openscap_scan.sh
+  shell: /home/vagrant/openscap_scan_cent.sh

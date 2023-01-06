@@ -1,7 +1,7 @@
-Vagrant.configure("2") do |config|
+ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 1024
-    vb. cpus = 1
+    vb.cpus = 1
     vb.gui = true
     vb.check_guest_additions = false
   end
@@ -13,16 +13,17 @@ Vagrant.configure("2") do |config|
     config.vm.provision "ansible" do |ansible|
       ansible.verbose = "v"
       ansible.playbook = "playbook.yaml"
+    end
   end
-end
 
   config.vm.define "centos" do |centos|
-      centos.vm.box = "centos/7" #Ubuntu image but different lts
+      centos.vm.box = "centos/7"
       centos.ssh.insert_key = true
       centos.vm.hostname = "centos"
       centos.vm.boot_timeout = 600
+      #It's just a bonus line, you van give inline commands in the vagrant file too
       centos.vm.provision "shell",
-        inline: "yum update && yum -y upgrade" #It's just a bonus line, you van give inline commands in the vagrant file too
+        inline: "yum update && yum -y upgrade"
       config.vm.provision "ansible" do |ansible|
         ansible.verbose = "v"
         ansible.playbook = "playbook.yaml"

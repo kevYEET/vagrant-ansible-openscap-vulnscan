@@ -18,6 +18,8 @@
         name: RedHat
       when: ansible_os_family == "RedHat"
 
-    - name: SSH and Firewall configureations
-      include_role:
-        name: ssh_hardening
+#    - name: SSH and Firewall configuration
+ #     include_role:
+  #      name: ssh_hardening
+
+      
