@@ -1,14 +1,9 @@
-# vagrant-ansible-openscap-vulnscan
 ## About
-This page will show you how to install and use Vagrant, Ansible and OpenSCAP with a Windows host machine using WSL, but you can do the same with a VirtualMachine or any Linux distro as host system. You can automate the OpenSCAP scan too with a bash script which will run on the VM, then you can scp the report.html to check the results about your created system.
-FYI: Make a snapshot or backup before you start patching any vulnerabilities!!!
+To use Vagrant, Ansible, and OpenSCAP on a Windows host machine, you can follow the steps outlined in this page, which involve using WSL. Alternatively, you can use a virtual machine or any Linux distribution as your host system. You can also automate the OpenSCAP scan by creating a bash script that runs on the virtual machine, and then use scp to transfer the report.html file to check the results of the scan on your system. It is important to note that you should create a snapshot or backup before patching any vulnerabilities.
 
 ## Vagrant Installation
 
-Go to:
-https://releases.hashicorp.com/vagrant/
-Download .msi for windows and .deb for Ubuntu (If you are using another distro just pick the correct file)
-You need to install vagrant on your WSL and Windows system either! Choose the most recent release!
+To install Vagrant on your WSL and Windows system, visit https://releases.hashicorp.com/vagrant/. There, you can download the .msi file for Windows and the .deb file for Ubuntu. If you are using a different distribution, simply select the correct file for your system. It is recommended to choose the most recent release.
 
 ```
 $ wget https://releases.hashicorp.com/vagrant/2.3.4/vagrant_2.3.4-1_amd64.deb
@@ -23,7 +18,7 @@ export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS=1
 
 export VAGRANT_DEFAULT_PROVIDER=vmware_desktop
 ```
-The default Vagrant provider is VirtualBox,if you would like to use a different hypervisor you need to define it with the last command you can see in this example vmware_desktop.
+By default, Vagrant uses VirtualBox as its provider. If you wish to use a different hypervisor, you can specify it in the last command, as shown in the example with vmware_desktop.
 
 Update and Check:
 ```
