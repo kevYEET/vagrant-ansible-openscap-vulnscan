@@ -1,7 +1,7 @@
 ---
-- name: Ubuntu release name
-  command: lsb_release -cs
-  register: rel
+- name: Print OS release
+  debug:
+    msg: "The OS release is {{ ansible_distribution_release }}"
 - name: Update and upgrade packages for Ubuntu
   become: true
   apt:
@@ -20,6 +20,17 @@
   systemd: name=nginx enabled=yes
 - name: start nginx
   service: name=nginx state=started
+
+- name: Copy apt update script to server
+  copy:
+    src: apt_update.sh
+    dest: /usr/local/bin/apt_update.sh
+    mode: 0755
+- name: Add cron job to run apt update every day at midnight
+  cron:
+    name: "Run apt update every day"
+    special_time: daily
+    job: "/usr/local/bin/apt_update.sh"
       
 - name: install bzip2
   apt: pkg=bzip2 state=present
@@ -34,8 +45,6 @@
   register: oscap_version
 - name: print oscap version
   debug: msg={{ oscap_version.stdout }}
-- name: print ubuntu release
-  debug: msg={{ rel.stdout }}
 - name: copy script
   copy:
     src: /home/kev/vag/openscap_scan.sh
