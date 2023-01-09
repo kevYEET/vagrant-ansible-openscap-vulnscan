@@ -1,0 +1,10 @@
+---
+- name: Restart login
+  service:
+    name: login
+    state: restarted
+    
+- name: Restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted
