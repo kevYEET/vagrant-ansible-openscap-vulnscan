@@ -49,7 +49,7 @@
     msg: "CentOS release is {{ ansible_distribution_version }}"
 - name: copy script
   copy:
-    src: /home/kev/vag/openscap_scan_cent.sh
+    src: files/openscap_scan_cent.sh
     dest: /home/vagrant/openscap_scan_cent.sh
     mode: 0755
 - name: Scan system for vulnerability
