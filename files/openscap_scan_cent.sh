@@ -1,8 +1,6 @@
 #!/bin/bash
 DATE=$(date +%m%d%Y)
-yum install perl-XML-Twig perl-XML-LibXML perl-Config-General openscap-scanner scap-security-guide bzip2 wget unzip
-# Download oval file
-wget https://oval.cisecurity.org/repository/download/5.11.2/vulnerability/centos_linux_7.xml
+# Copy the file
+cp /usr/share/xml/scap/ssg/content/ssg-centos7-ds.xml .
 # Scan for vulnerability
-oscap oval eval --report report.html centos_linux_7.xml
-
+oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard --report report.html ssg-centos7-ds.xml
