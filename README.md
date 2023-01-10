@@ -48,3 +48,20 @@ Copy this into your .ssh/config file:
 Host 127.0.0.1
     PubkeyAcceptedKeyTypes +ssh-rsa
 ```
+## This Vagrantfile will do the following:
+
+**Vagrant.configure("2"):** This line indicates that the Vagrantfile is using version 2 of the configuration syntax.
+**config.vm.provider "virtualbox":** This line specifies that the Vagrantfile will be using VirtualBox as the provider.
+**vb.memory = 1024:** This line sets the amount of memory allocated for the virtual machine to 1024MB.
+**vb.cpus = 1:** This line sets the number of CPU cores allocated for the virtual machine to 1.
+**vb.gui = true:** This line enables the VirtualBox GUI for the virtual machine.
+**vb.check_guest_additions = false:** This line disables the check for guest additions on the virtual machine.
+**config.vm.define "bionic":** This line creates a new virtual machine named "bionic".
+**bionic.vm.box = "generic/ubuntu1804":** This line specifies that the "bionic" virtual machine will be using the generic/ubuntu1804 box.
+**bionic.vm.hostname = "bionic":** This line sets the hostname of the "bionic" virtual machine to "bionic".
+**bionic.ssh.insert_key = true:** This line enables automatic key insertion for the "bionic" virtual machine, which allows you to use vagrant ssh without specifying a key.
+**config.vm.provision "ansible":** This line specifies that the "bionic" virtual machine will be provisioned with Ansible.
+**ansible.verbose = "v":** This line sets the Ansible provisioner to verbose mode, which will display more detailed output.
+**ansible.playbook = "playbook.yaml":** This line specifies the Ansible playbook that will be used to provision the "bionic" virtual machine.
+**config.vm.define "centos":** This line creates a new virtual machine named "centos".
+**centos.vm.box = "centos/7":** This line specifies that
