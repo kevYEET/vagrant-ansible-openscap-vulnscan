@@ -6,4 +6,4 @@ wget https://security-metadata.canonical.com/oval/com.ubuntu.$(lsb_release -cs).
 # Extract the xml file
 bunzip2 com.ubuntu.$(lsb_release -cs).usn.oval.xml.bz2
 # Scan for vulnerability
-oscap oval eval --report report.html com.ubuntu.$(lsb_release -cs).usn.oval.xml
+oscap oval eval --report reportubu.html com.ubuntu.$(lsb_release -cs).usn.oval.xml

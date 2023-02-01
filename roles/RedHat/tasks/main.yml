@@ -38,6 +38,10 @@
   yum:
     name: openscap-scanner
     state: present
+- name: Installing Security Guides
+  yum:
+    name: scap-security-guide
+    state: present
 
 - name: validate installation
   shell: oscap --version | grep "command line tool"
