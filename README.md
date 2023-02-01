@@ -36,10 +36,18 @@ $ sudo add-apt-repository --yes --update ppa:ansible/ansible
 $ sudo apt install ansible
 ```
 
+Manual Installation:
+```yum -y install openscap-scanner scap-security-guide```
+On Debian based distros you will need to manually install the scap-security-guide from github and the scanner name as an apt package is **libopenscap8**
+
+You will find the OpenSCAP security guidelines here:
+```ls /usr/share/xml/scap/ssg/content/ ```
+![c851c0306f26f2eca89d4124fc262e3c.png](../_resources/c851c0306f26f2eca89d4124fc262e3c.png)
+
 ## Other Settings
 If you have no .ssh directory you must create it with the following:
 ```
-$ mkdir -p ~/.ssh && chmod 700 ~%.ssh
+$ mkdir -p ~/.ssh && chmod 700 ~/.ssh
 $ touch ~/.ssh/config
 $ chmod 600 ~/.ssh/config
 ```
