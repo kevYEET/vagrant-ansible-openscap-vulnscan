@@ -42,7 +42,7 @@ On Debian based distros you will need to manually install the scap-security-guid
 
 You will find the OpenSCAP security guidelines here:
 ```ls /usr/share/xml/scap/ssg/content/ ```
-![c851c0306f26f2eca89d4124fc262e3c.png](../_resources/c851c0306f26f2eca89d4124fc262e3c.png)
+![results](../https://github.com/kevYEET/vagrant-ansible-openscap-vulnscan/blob/main/_resources/c851c0306f26f2eca89d4124fc262e3c.png)
 
 ## Other Settings
 If you have no .ssh directory you must create it with the following:
